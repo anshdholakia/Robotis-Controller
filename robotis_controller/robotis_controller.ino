@@ -3,7 +3,7 @@
 #include "Arduino.h"
 #else
 #endif
-#include "new_controll.h"
+#include "../new_controll.h"
 
 Controll_robot ctr;
 void setup() {
