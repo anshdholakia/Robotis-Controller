@@ -1,6 +1,12 @@
+/*
+Author: Ansh Dholakia
+Controller Classfor Open Manipulator-X Robotis
+*/
+
 #include "Arduino.h"
 #include <open_manipulator_libs.h>
 #include <queue>
+#include <vector>
 using namespace std;
 
 class Controll_robot {
@@ -18,13 +24,28 @@ private:
   int flag = 0;
 
   double angleToValue(double angle, int id) {
+    /*
+    This function converts an angle in degree to the value of the respective joint
+    Input: Angle in degree
+    Output: Value of Joint
+    */
     return (angle - constants[id - 1]) / multipliers[id - 1];
   }
   double valueToAngle(double value, int id) {
+    /*
+    This function converts a value of the respective joint to an angle in degree
+    Input: Value of Joint
+    Output: Angle in degree
+    */
     return multipliers[id - 1] * value + constants[id - 1];
   }
 
   void moveJS(double j2, double j3, double j4, int id, double gripper_position, double speed, double* previous) {
+    /*
+    This function moves the robot to that location by assigning the values of the joints
+    Input: Joint values, speed, id, previous values
+    Output: None
+    */
     if(id==256){
       opm.disableAllActuator();
       return;
@@ -56,6 +77,11 @@ private:
 
   // Output warning before starting motion
   void warning() {
+    /*
+    This function displays a warning message before starting motion
+    Input: None
+    Output: None
+    */
     Serial.print("Locking Open Manipulator in 3 ...");
     delay_ms(1000);
     Serial.print("2...");
@@ -73,6 +99,11 @@ private:
   }
 
   void process() {
+    /*
+    This function syncs the opencr chip with the clock of the robot
+    Input: None
+    Output: None
+    */
     present_time = millis() / 1000.0;
     // Trajectory following movement occurs here
     if (present_time - previous_time >= control_time) {
@@ -82,6 +113,11 @@ private:
   }
 
   void addSequence(int id, double angle) {
+    /*
+    This function adds a new point to the sequence of points
+    Input: id, angle
+    Output: None
+    */
     if ((id < 1 || id > 3) && id != 254 && id!=256 && id!=257) {
       Serial.println("Usage: dxl_SetPos(0-180, 1-3)");
       return;
@@ -120,6 +156,11 @@ private:
 
 public:
   void init() {
+    /*
+    This function initializes the robot
+    Input: None
+    Output: None
+    */
     opm.setOpenManipulatorCustomJointId(11, 12, 13, 14, 15);
     opm.initOpenManipulator(platform_state);
     Serial.println("OpenManipulator Init Begin");
@@ -129,6 +170,11 @@ public:
 
 
   void dxl_SetPos(int id, double angle) {
+    /*
+    This function sets the position of the respective joint by adding a sequence
+    Input: id, angle
+    Output: None
+    */
     if (id < 1 || id > 3) {
       Serial.println("Usage: dxl_SetPos(1-3, 0-180)");
       return;
@@ -138,10 +184,20 @@ public:
   }
 
   void start_loop() {
+    /*
+    This function increments the flag variable which tracks the start and end of Arduino loop
+    Input: None
+    Output: None
+    */
     flag++;
   }
 
   void dxl_Grab() {
+    /*
+    This function grabs using the end effector
+    Input: None
+    Output: None
+    */
     if (flag <= 1) {
       gripper_pos = -0.01;
     }
@@ -149,6 +205,11 @@ public:
   }
 
   void dxl_Release() {
+    /*
+    This function releases using the end effector
+    Input: None
+    Output: None
+    */
     if (flag <= 1) {
       gripper_pos = 0.01;
     }
@@ -156,6 +217,11 @@ public:
   }
 
   void dxl_SetVel(int id, double velo) {
+    /*
+    This function sets the velocity of the respective joint
+    Input: id, velocity
+    Output: None
+    */
     if (velo < 1 || velo > 10 || id < 1 || id > 3) {
       Serial.println("Usage: dxl_SetVel(1-3,1-10)");
       return;
@@ -163,21 +229,72 @@ public:
     velocity[id - 1] = (double)velo;
   }
 
+  double* dxl_InverseKinematics(double j1, double j2, double j3) {
+    /*
+    This function returns the angles of the respective joints
+    Input: Angles of joints
+    Output: Position of end effector
+         l2
+       ______
+    l1/      \l3
+     /     _ /\       
+     |    / |  |
+     |  _/
+    _|_/l4
+    */
+   double length1 = 5, length2= 5, length3 = 2.5;
+  }
 
+  double* dxl_ForwardKinematics(double angle1, double angle2, double angle3) {
+    /*
+    This function returns the end effector position given the angles of the respective joints
+    Input: Position of end effector
+    Output: Angles of joints
+         l2
+       ______
+    l1/      \l3
+     /     _ /\       
+     |    / |  |
+     |  _/
+    _|_/l4
+
+    The joint between base and l1 is angle1
+    The joint between l1 and l2 is angle2
+    The joint between l2 and l3 is angle3
+    */
+    double theta1 = (angle1 * 71) / 4068, theta2 = (angle2 * 71) / 4068, theta3 = (angle3 * 71) / 4068;
+
+
+  }
 
   void dxl_TorqueEnable(int id) {
+    /*
+    This function enables torque on the respective joint
+    Input: id
+    Output: None
+    */
     if (id == 254) {
       addSequence(257, 0);
     }
   }
 
   void dxl_TorqueDisable(int id) {
+    /*
+    This function disables torque on the respective joint
+    Input: id
+    Output: None
+    */
     if (id == 254) {
       addSequence(256, 0);
     }
   }
 
   double dxl_GetPos(int id) {
+    /*
+    This function returns the position of the respective joint
+    Input: id
+    Output: Position of joint
+    */
     if (id < 1 || id > 3) {
       Serial.println("Usage: dxl_GetPos(1-3)");
       return -1;
