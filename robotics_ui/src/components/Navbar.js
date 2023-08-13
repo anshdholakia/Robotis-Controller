@@ -27,12 +27,12 @@ export default function Navbar() {
                   color="inherit" aria-label="menu">
                </IconButton>
                <Typography variant="h6" color="inherit">
-               <Link color="inherit" href="http://127.0.0.1:3000/" marginRight={10}>
+               <Link color="inherit" href="/" marginRight={10}>
                   Home
                </Link>
                </Typography>
                <Typography variant="h6" color="inherit">
-               <Link color="inherit" href="http://000000000:3000/controller">
+               <Link color="inherit" href="/controller">
                   Controller
                </Link>
                </Typography>

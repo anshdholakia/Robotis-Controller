@@ -1,4 +1,4 @@
-import './App.css';
+import './css/App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // import pages
@@ -11,16 +11,16 @@ import Navbar from './components/Navbar';
 
 
 function App() {
-  return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" exact component={Home} />
-        <Route path="/controller" component={Controller} />
-      </Routes>
-      <Footer />
-    </Router>
-  );
+   return (
+      <Router>
+         <Navbar />
+         <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/controller" element={<Controller />} />
+         </Routes>
+         <Footer />
+      </Router>
+   );
 }
 
 export default App;

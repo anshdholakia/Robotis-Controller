@@ -32,9 +32,8 @@ function Footer() {
                   : theme.palette.grey[800],
          }}
          style={{
-            position: "fixed",
+            position: "relative",
             bottom: "0",
-            width: "100%",
          }}
       >
          <Container maxWidth="sm">
