@@ -11,7 +11,7 @@ function Home() {
    const [news, setNews] = useState([]);
 
    const getLatestNews = async () => {
-      const response = await axios.get('https://newsapi.org/v2/everything?q=robotics&from=2023-07-13&sortBy=publishedAt&apiKey=' + process.env.REACT_APP_CURRENT_NEWS_API);
+      const response = await axios.get('https://newsapi.org/v2/everything?q=robotics&sortBy=publishedAt&apiKey=' + process.env.REACT_APP_CURRENT_NEWS_API);
       console.log(response.data['articles']);
       // store the news articles in state
       setNews(response.data['articles']);

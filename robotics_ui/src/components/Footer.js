@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import Paper from "@mui/material/Paper";
 
 function Copyright() {
    return (
@@ -19,30 +20,31 @@ function Copyright() {
 
 function Footer() {
    return (
-      // place box at the bottom of the page
-      <Box
-         component="footer"
-         sx={{
-            py: 3,
-            px: 2,
-            mt: 'auto',
-            backgroundColor: (theme) =>
-               theme.palette.mode === 'light'
-                  ? theme.palette.grey[200]
-                  : theme.palette.grey[800],
-         }}
-         style={{
-            position: "relative",
-            bottom: "0",
-         }}
-      >
-         <Container maxWidth="sm">
-            <Typography variant="body1">
-               Robotics Controller - Drexel Engineering. Made by Ansh Dholakia
-            </Typography>
-            <Copyright />
+      // https://stackoverflow.com/questions/72440972/how-to-push-the-footer-in-mui-at-the-very-bottom-and-make-it-stick
+      <Paper sx={{
+         marginTop: 'calc(10% + 60px)',
+         position: 'relative',
+         bottom: 0,
+         justifyContent: "center",
+         alignItems: "center",
+      }} component="footer" square variant="outlined">
+         <Container maxWidth="lg">
+            <Box
+               sx={{
+                  flexGrow: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  display: "flex",
+                  mb: 2,
+                  mt: 2,
+               }}
+            >
+               <Typography variant="caption" color="initial">
+                  {Copyright()}
+               </Typography>
+            </Box>
          </Container>
-      </Box>
+      </Paper>
    )
 }
 
