@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 
 function Copyright() {
    return (
-      <Typography variant="body2" color="text.secondary">
+      <Typography variant="body2" color="white">
          {'Copyright © '}
          <Link color="inherit" href="http://127.0.0.1:3000">
             Robotics Controller
@@ -27,6 +27,7 @@ function Footer() {
          bottom: 0,
          justifyContent: "center",
          alignItems: "center",
+         backgroundColor: "#083e0c",
       }} component="footer" square variant="outlined">
          <Container maxWidth="lg">
             <Box

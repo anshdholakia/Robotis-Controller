@@ -9,6 +9,9 @@ const useStyles = makeStyles({
    root: {
       flexGrow: 1,
    },
+   appbar:{
+      backgroundColor: '#08395f !important',
+   },
    menuButton: {
       marginRight: "20px",
    },
@@ -20,7 +23,7 @@ export default function Navbar() {
 
    return (
       <div className={classes.root}>
-         <AppBar position="static">
+         <AppBar position="static" className={classes.appbar}>
             <Toolbar variant="dense">
                <IconButton edge="start"
                   className={classes.menuButton}
