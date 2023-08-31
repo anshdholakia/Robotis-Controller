@@ -229,44 +229,6 @@ public:
     velocity[id - 1] = (double)velo;
   }
 
-  double* dxl_InverseKinematics(double j1, double j2, double j3) {
-    /*
-    This function returns the angles of the respective joints
-    Input: Angles of joints
-    Output: Position of end effector
-         l2
-       ______
-    l1/      \l3
-     /     _ /\       
-     |    / |  |
-     |  _/
-    _|_/l4
-    */
-   double length1 = 5, length2= 5, length3 = 2.5;
-  }
-
-  double* dxl_ForwardKinematics(double angle1, double angle2, double angle3) {
-    /*
-    This function returns the end effector position given the angles of the respective joints
-    Input: Position of end effector
-    Output: Angles of joints
-         l2
-       ______
-    l1/      \l3
-     /     _ /\       
-     |    / |  |
-     |  _/
-    _|_/l4
-
-    The joint between base and l1 is angle1
-    The joint between l1 and l2 is angle2
-    The joint between l2 and l3 is angle3
-    */
-    double theta1 = (angle1 * 71) / 4068, theta2 = (angle2 * 71) / 4068, theta3 = (angle3 * 71) / 4068;
-
-
-  }
-
   void dxl_TorqueEnable(int id) {
     /*
     This function enables torque on the respective joint
