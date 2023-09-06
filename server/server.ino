@@ -28,12 +28,29 @@ void setup()
    Serial.println("Connected to WiFi");
 
    server.on("/move_joint", HTTP_POST, handleMoveJoint);
+   server.on("/close_open_gripper", HTTP_POST, handleCloseOpenGripper);
    server.begin();
 }
 
 void loop()
 {
    server.handleClient();
+}
+
+void handleCloseOpenGripper()
+{
+   if server.hasArg("gripper_pos") && server.arg("gripper_pos") != NULL)
+      {
+         int gripper_pos = server.arg("gripper_pos").toInt();
+         if (gripper_pos == 1)
+         {
+            ctr.dxl_Release();
+         }
+         else if (gripper_pos == 2)
+         {
+            ctr.dxl_Open();
+         }
+      }
 }
 
 void handleMoveJoint()
