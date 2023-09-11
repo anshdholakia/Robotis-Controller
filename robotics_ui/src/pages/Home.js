@@ -12,7 +12,6 @@ function Home() {
 
    const getLatestNews = async () => {
       const response = await axios.get('https://newsapi.org/v2/everything?q=robotics&sortBy=publishedAt&apiKey=' + process.env.REACT_APP_CURRENT_NEWS_API);
-      console.log(response.data['articles']);
       // store the news articles in state
       setNews(response.data['articles']);
    }
@@ -44,7 +43,7 @@ function Home() {
                   return (
                      <div key={index} style={{ display: 'flex', justifyContent: 'left', alignItems: 'center',  width: '100%'}}>
                         <Card style={{width:'100%', 'justifyContent': 'left'}}>
-                           <CardActionArea href={article.url} style={{display: 'flex', justifyContent: 'left', alignItems: 'center', flexDirection: 'row'}}>
+                           <CardActionArea href={article.url} style={{display: 'flex', justifyContent: 'left', alignItems: 'center', flexDirection: 'row'}} target='_blank'>
                               <CardMedia
                                  component="img"
                                  image={article.urlToImage}

@@ -29,12 +29,26 @@ void setup()
 
    server.on("/move_joint", HTTP_POST, handleMoveJoint);
    server.on("/close_open_gripper", HTTP_POST, handleCloseOpenGripper);
+   server.on("/get_joint_angles", HTTP_GET, handleGetJointAngles);
    server.begin();
 }
 
 void loop()
 {
    server.handleClient();
+}
+
+void handleGetJointAngles()
+{
+   double joint_angles[3];
+   joint_angles[0] = ctr.dxl_GetPos(1);
+   joint_angles[1] = ctr.dxl_GetPos(2);
+   joint_angles[2] = ctr.dxl_GetPos(3);
+   // Format joint_angles as a comma-separated string
+   String response = String(joint_angles[0]) + "," + String(joint_angles[1]) + "," + String(joint_angles[2]);
+
+   // Send the response
+   server.send(200, "text/plain", response);
 }
 
 void handleCloseOpenGripper()
