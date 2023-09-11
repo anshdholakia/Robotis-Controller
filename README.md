@@ -1,4 +1,4 @@
-# Setting up the Open Manipulator X
+# Setting up the Controller
 
 #### Devices Required:
 
@@ -17,6 +17,8 @@
 * Connect the `RX` of the ESP8266 to the `TX` (or a suitable UART pin) of OpenCR.
 
 **Connect OpenManipulator-X to OpenCR** : Follow the official documentation to ensure the OpenManipulator-X is correctly connected to the OpenCR board. (For my setup, I just had to connect the combined 4 wires to the chip, power the Open CR and connect the Open Manipulator X to an external source.)
+
+![1694471878390](image/README/1694471878390.png)
 
 #### Running the Code
 
