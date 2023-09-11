@@ -20,7 +20,7 @@
 
 Follow the official documentation to ensure the OpenManipulator-X is correctly connected to the OpenCR board. (For my setup, I just had to connect the combined 4 wires to the chip, power the Open CR and connect the Open Manipulator X to an external source.)
 
-![1694471878390](image/README/1694471878390.png "Open CR to Open ManipulatorX Connection")
+<img src="image/README/1694471878390.png" alt="drawing" width="200"/>
 
 #### Running the Code
 
